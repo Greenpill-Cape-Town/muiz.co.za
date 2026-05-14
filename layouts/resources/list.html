@@ -1,0 +1,35 @@
+{{ define "main" }}
+<div class="page-header">
+  <div class="container">
+    <p class="eyebrow">Marine Estate</p>
+    <h1>Community Resources</h1>
+    <p>Useful contacts, services, and information for Marine Estate residents — curated by our groups.</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    {{ if .Pages }}
+    <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+      {{ range .Pages }}
+      <a class="list-item" href="{{ .Permalink }}">
+        <div style="font-size: 1.8rem;">{{ .Params.icon | default "📌" }}</div>
+        <div class="list-item-body">
+          <div class="list-item-title">{{ .Title }}</div>
+          <div class="list-item-meta" style="margin-bottom: 0.4rem;">{{ .Summary | truncate 150 }}</div>
+          {{ with .Params.groups }}
+          <div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
+            {{ range . }}<span class="tag">{{ . }}</span>{{ end }}
+          </div>
+          {{ end }}
+        </div>
+        {{ with .Params.contact }}<div style="font-size: 0.82rem; color: var(--ocean-mid); font-weight: 500; white-space: nowrap;">{{ . }}</div>{{ end }}
+      </a>
+      {{ end }}
+    </div>
+    {{ else }}
+    <div class="empty-state">Resources will appear here once added by group admins.</div>
+    {{ end }}
+  </div>
+</section>
+{{ end }}

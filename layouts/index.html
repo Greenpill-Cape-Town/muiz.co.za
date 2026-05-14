@@ -1,0 +1,117 @@
+{{ define "main" }}
+
+<!-- HERO -->
+<section style="background: var(--ocean); color: white; padding: 5rem 2rem 4rem; position: relative; overflow: hidden;">
+  <div style="position: absolute; inset: 0; background: radial-gradient(ellipse 70% 80% at 80% 50%, #1A7A8A22 0%, transparent 60%); pointer-events: none;"></div>
+  <div class="container" style="position: relative;">
+    <p style="font-size: 0.75rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal); margin-bottom: 1rem;">Muizenberg, Cape Town</p>
+    <h1 style="font-family: 'Fraunces', serif; font-size: clamp(2.4rem, 6vw, 4rem); font-weight: 600; line-height: 1.1; margin-bottom: 1rem; max-width: 680px;">
+      Marine Estate<br><em style="color: var(--teal);">Connected Communities</em>
+    </h1>
+    <p style="font-size: clamp(1rem, 2vw, 1.15rem); font-weight: 300; opacity: 0.8; max-width: 520px; line-height: 1.7; margin-bottom: 2rem;">
+      Neighbours connecting around shared interests — from recycling to film, repair cafes to greening our vlei. Find your group, your people, your place.
+    </p>
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+      <a href="{{ .Site.Params.whatsapp_community_link }}" target="_blank" rel="noopener" class="wa-cta">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Join the Community
+      </a>
+      <a href="/groups/" style="color: rgba(255,255,255,0.7); font-size: 0.9rem; text-decoration: none;">Browse groups →</a>
+    </div>
+  </div>
+</section>
+
+<!-- GROUPS -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Our Groups</h2>
+      <a href="/groups/" class="section-link">View all →</a>
+    </div>
+    <div class="grid-3">
+      {{ range where .Site.RegularPages "Section" "groups" }}
+      <a class="card" href="{{ .Permalink }}">
+        <div class="card-accent" style="background: {{ .Params.color | default "var(--ocean)" }};"></div>
+        <div class="card-icon">{{ .Params.icon | default "👥" }}</div>
+        <h3>{{ .Title }}</h3>
+        <p>{{ .Params.tagline | default .Summary }}</p>
+      </a>
+      {{ else }}
+      <p style="color: var(--ink-muted); font-size: 0.9rem;">No groups yet.</p>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- LATEST EVENTS -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Upcoming Events & Announcements</h2>
+      <a href="/events/" class="section-link">View all →</a>
+    </div>
+    {{ $events := where .Site.RegularPages "Section" "events" }}
+    {{ if $events }}
+    <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+      {{ range first 4 $events }}
+      <a class="list-item" href="{{ .Permalink }}">
+        <div class="list-item-body">
+          <div class="list-item-title">{{ .Title }}</div>
+          <div class="list-item-meta">{{ with .Params.group }}{{ . }} · {{ end }}{{ .Summary | truncate 100 }}</div>
+        </div>
+        <div class="list-item-date">{{ .Date.Format "2 Jan" }}</div>
+      </a>
+      {{ end }}
+    </div>
+    {{ else }}
+    <div class="empty-state">No events posted yet — check back soon.</div>
+    {{ end }}
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- RESOURCES TEASER -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Community Resources</h2>
+      <a href="/resources/" class="section-link">View all →</a>
+    </div>
+    {{ $resources := where .Site.RegularPages "Section" "resources" }}
+    {{ if $resources }}
+    <div class="grid-2">
+      {{ range first 4 $resources }}
+      <a class="list-item" href="{{ .Permalink }}">
+        <div style="font-size: 1.4rem;">{{ .Params.icon | default "📌" }}</div>
+        <div class="list-item-body">
+          <div class="list-item-title">{{ .Title }}</div>
+          <div class="list-item-meta">{{ .Summary | truncate 100 }}</div>
+        </div>
+      </a>
+      {{ end }}
+    </div>
+    {{ else }}
+    <div class="empty-state">Resources coming soon.</div>
+    {{ end }}
+  </div>
+</section>
+
+<!-- JOIN BANNER -->
+<section style="background: var(--sand); border-top: 1px solid var(--sand-dark); border-bottom: 1px solid var(--sand-dark); padding: 3rem 2rem; text-align: center;">
+  <div class="container" style="max-width: 560px;">
+    <h2 style="font-family: 'Fraunces', serif; font-size: 1.8rem; font-weight: 600; margin-bottom: 0.75rem;">You're welcome here.</h2>
+    <p style="color: var(--ink-mid); line-height: 1.7; margin-bottom: 1.5rem;">Marine Estate Connected Communities is open to all residents. Scan the QR code or tap the button below to join our WhatsApp community and find your group.</p>
+    {{ with .Site.Params.whatsapp_community_qr }}
+    <img src="{{ . }}" alt="WhatsApp QR code" style="width: 140px; height: 140px; border-radius: 8px; margin-bottom: 1rem; border: 4px solid white; display: block; margin: 0 auto 1.25rem;">
+    {{ end }}
+    <a href="{{ .Site.Params.whatsapp_community_link }}" target="_blank" rel="noopener" class="wa-cta">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Join on WhatsApp
+    </a>
+  </div>
+</section>
+
+{{ end }}

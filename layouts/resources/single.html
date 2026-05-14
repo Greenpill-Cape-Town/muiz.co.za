@@ -1,0 +1,28 @@
+{{ define "main" }}
+<div class="page-header">
+  <div class="container">
+    <p class="eyebrow"><a href="/resources/" style="color: var(--teal); text-decoration: none;">← Resources</a></p>
+    <h1>{{ .Params.icon | default "📌" }} {{ .Title }}</h1>
+    {{ with .Params.groups }}<p>{{ delimit . " · " }}</p>{{ end }}
+  </div>
+</div>
+
+<section class="section">
+  <div class="container" style="max-width: 720px;">
+    <div style="background: white; border: 1px solid var(--sand-dark); border-radius: var(--radius); padding: 2rem;">
+      <div class="prose">{{ .Content }}</div>
+      {{ with .Params.contact }}
+      <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--sand-dark);">
+        <div style="font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-muted); margin-bottom: 0.4rem;">Contact</div>
+        <div style="font-size: 0.95rem; font-weight: 500;">{{ . }}</div>
+      </div>
+      {{ end }}
+      {{ with .Params.url }}
+      <div style="margin-top: 1rem;">
+        <a href="{{ . }}" target="_blank" rel="noopener" style="color: var(--ocean-mid); font-size: 0.9rem; font-weight: 500;">Visit website ↗</a>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}

@@ -1,0 +1,100 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "static/images"
+public_folder: "/images"
+
+# Netlify Identity
+site_url: https://muiz.co.za
+
+collections:
+
+  # ── GROUPS ──
+  - name: "groups"
+    label: "Groups"
+    label_singular: "Group"
+    folder: "content/groups"
+    create: true
+    slug: "{{slug}}"
+    editor:
+      preview: false
+    fields:
+      - { label: "Group Name", name: "title", widget: "string" }
+      - { label: "Icon (emoji)", name: "icon", widget: "string", default: "👥" }
+      - { label: "Tagline", name: "tagline", widget: "string", hint: "One sentence — shown on the homepage card." }
+      - { label: "Accent Colour", name: "color", widget: "color", default: "#1A7A8A" }
+      - { label: "Focus Area", name: "focus", widget: "string", hint: "e.g. Environment, Arts & Culture, Education" }
+      - { label: "WhatsApp Invite Link", name: "whatsapp_link", widget: "string", required: false }
+      - { label: "WhatsApp QR Code Image", name: "whatsapp_qr", widget: "image", required: false }
+      - { label: "Group Admin Name", name: "admin", widget: "string", required: false }
+      - { label: "Description", name: "body", widget: "markdown", hint: "Full description shown on the group page." }
+
+  # ── EVENTS & ANNOUNCEMENTS ──
+  - name: "events"
+    label: "Events & Announcements"
+    label_singular: "Event / Announcement"
+    folder: "content/events"
+    create: true
+    slug: "{{year}}-{{month}}-{{slug}}"
+    sortable_fields: ["date", "title", "group"]
+    editor:
+      preview: false
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - label: "Type"
+        name: "type"
+        widget: "select"
+        options:
+          - { label: "📅 Event", value: "event" }
+          - { label: "📢 Announcement", value: "announcement" }
+        default: "event"
+      - label: "Group"
+        name: "group"
+        widget: "select"
+        required: false
+        options:
+          - "Film Circle"
+          - "'Berg Recycling & Waste"
+          - "General Circle - CCME"
+          - "Repair Cafe - Muiz"
+          - "Greening and Vlei Care"
+          - "Tech4Good"
+          - "Project: Play at Zandvlei"
+          - "Activating Commons"
+          - "Learning Circle"
+        hint: "Leave blank for site-wide announcements."
+      - { label: "Location", name: "location", widget: "string", required: false, hint: "For events only." }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  # ── RESOURCES ──
+  - name: "resources"
+    label: "Resources"
+    label_singular: "Resource"
+    folder: "content/resources"
+    create: true
+    slug: "{{slug}}"
+    editor:
+      preview: false
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Icon (emoji)", name: "icon", widget: "string", default: "📌" }
+      - label: "Groups"
+        name: "groups"
+        widget: "select"
+        multiple: true
+        options:
+          - "Film Circle"
+          - "'Berg Recycling & Waste"
+          - "General Circle - CCME"
+          - "Repair Cafe - Muiz"
+          - "Greening and Vlei Care"
+          - "Tech4Good"
+          - "Project: Play at Zandvlei"
+          - "Activating Commons"
+          - "Learning Circle"
+        hint: "Select all groups this resource is relevant to."
+      - { label: "Contact", name: "contact", widget: "string", required: false }
+      - { label: "Website URL", name: "url", widget: "string", required: false }
+      - { label: "Description", name: "body", widget: "markdown" }

@@ -1,0 +1,37 @@
+{{ define "main" }}
+<div class="page-header">
+  <div class="container">
+    <p class="eyebrow">Marine Estate</p>
+    <h1>Events & Announcements</h1>
+    <p>What's happening across our community groups.</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    {{ if .Pages }}
+    <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+      {{ range .Pages }}
+      <a class="list-item" href="{{ .Permalink }}">
+        <div class="list-item-body">
+          <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.3rem;">
+            {{ if eq .Params.type "announcement" }}
+            <span class="tag" style="background: #FEF3C7; color: #92400E;">📢 Announcement</span>
+            {{ else }}
+            <span class="tag" style="background: #DBEAFE; color: #1E40AF;">📅 Event</span>
+            {{ end }}
+            {{ with .Params.group }}<span class="tag">{{ . }}</span>{{ end }}
+          </div>
+          <div class="list-item-title">{{ .Title }}</div>
+          <div class="list-item-meta">{{ .Summary | truncate 140 }}</div>
+        </div>
+        <div class="list-item-date">{{ .Date.Format "2 Jan 2006" }}</div>
+      </a>
+      {{ end }}
+    </div>
+    {{ else }}
+    <div class="empty-state">No events or announcements yet. Check back soon.</div>
+    {{ end }}
+  </div>
+</section>
+{{ end }}

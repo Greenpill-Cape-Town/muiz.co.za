@@ -1,0 +1,12 @@
+baseURL = "https://muiz.co.za/"
+languageCode = "en-za"
+title = "Marine Estate Connected Communities"
+
+[params]
+  description = "Connecting the Marine Estate community in Muizenberg — one group at a time."
+  whatsapp_community_link = "https://chat.whatsapp.com/PLACEHOLDER"
+  whatsapp_community_qr = "/images/qr-community.png"
+  email = ""
+
+[taxonomies]
+  tag = "tags"

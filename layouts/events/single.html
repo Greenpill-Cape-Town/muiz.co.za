@@ -1,0 +1,22 @@
+{{ define "main" }}
+<div class="page-header">
+  <div class="container">
+    <p class="eyebrow"><a href="/events/" style="color: var(--teal); text-decoration: none;">← Events</a></p>
+    <h1>{{ .Title }}</h1>
+    <p>{{ .Date.Format "Monday, 2 January 2006" }}{{ with .Params.group }} · {{ . }}{{ end }}</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container" style="max-width: 720px;">
+    <div style="background: white; border: 1px solid var(--sand-dark); border-radius: var(--radius); padding: 2rem;">
+      {{ with .Params.location }}
+      <div style="margin-bottom: 1.5rem; padding: 0.85rem 1rem; background: var(--sand); border-radius: 8px; font-size: 0.9rem;">
+        📍 {{ . }}
+      </div>
+      {{ end }}
+      <div class="prose">{{ .Content }}</div>
+    </div>
+  </div>
+</section>
+{{ end }}

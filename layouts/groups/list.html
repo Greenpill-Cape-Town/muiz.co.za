@@ -1,0 +1,29 @@
+{{ define "main" }}
+<div class="page-header">
+  <div class="container">
+    <p class="eyebrow">Marine Estate</p>
+    <h1>Community Groups</h1>
+    <p>Each group focuses on a different area of community life. Join one, join several — all are welcome.</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div class="grid-3">
+      {{ range .Pages }}
+      <a class="card" href="{{ .Permalink }}">
+        <div class="card-accent" style="background: {{ .Params.color | default "var(--ocean)" }};"></div>
+        <div class="card-icon">{{ .Params.icon | default "👥" }}</div>
+        <h3>{{ .Title }}</h3>
+        <p>{{ .Params.tagline | default .Summary }}</p>
+        <div style="margin-top: 1rem;">
+          <span class="tag">{{ .Params.focus | default "Community" }}</span>
+        </div>
+      </a>
+      {{ else }}
+      <p style="color: var(--ink-muted);">No groups yet.</p>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}

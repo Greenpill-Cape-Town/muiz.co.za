@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} · {{ .Site.Title }}{{ end }}</title>
+  <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ocean:       #0D4F6C;
+      --ocean-mid:   #1A7A8A;
+      --teal:        #1DB89A;
+      --sand:        #F5EDD8;
+      --sand-dark:   #E8D9B8;
+      --coral:       #E8674A;
+      --coral-light: #FAE8E3;
+      --cream:       #FEFAF3;
+      --ink:         #1C2B35;
+      --ink-mid:     #4A5E6A;
+      --ink-muted:   #8A9BA5;
+      --white:       #FFFFFF;
+      --radius:      12px;
+
+      /* Group colours */
+      --c-film:      #7B5EA7;
+      --c-recycling: #5A8A4A;
+      --c-general:   #1A7A8A;
+      --c-repair:    #C47A2A;
+      --c-greening:  #3A8A5A;
+      --c-tech:      #2A5A9A;
+      --c-play:      #E8674A;
+      --c-commons:   #8A4A7A;
+      --c-learning:  #4A7A8A;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    main { flex: 1; }
+
+    /* ── NAV ── */
+    .site-nav {
+      background: var(--ocean);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 58px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-logo {
+      font-family: 'Fraunces', serif;
+      font-size: 1rem;
+      color: var(--white);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .nav-logo span { opacity: 0.7; font-weight: 300; }
+    .nav-links { display: flex; gap: 0.25rem; list-style: none; }
+    .nav-links a {
+      padding: 0.4rem 0.85rem;
+      border-radius: 6px;
+      font-size: 0.83rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      transition: all 0.15s;
+    }
+    .nav-links a:hover { color: white; background: rgba(255,255,255,0.1); }
+    .nav-links a.active { color: white; background: rgba(255,255,255,0.15); }
+    .nav-join {
+      padding: 0.4rem 1rem;
+      background: var(--teal);
+      color: white !important;
+      border-radius: 6px;
+      font-weight: 600 !important;
+      opacity: 1 !important;
+    }
+    .nav-join:hover { background: #15a087 !important; }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      background: var(--ocean);
+      padding: 3rem 2rem 2.5rem;
+      color: white;
+    }
+    .page-header .eyebrow {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.6rem;
+    }
+    .page-header h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 600;
+      line-height: 1.15;
+      margin-bottom: 0.75rem;
+    }
+    .page-header p {
+      font-size: 1rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.7);
+      max-width: 540px;
+      line-height: 1.65;
+    }
+
+    /* ── CONTAINER ── */
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 2rem; }
+
+    /* ── CARDS ── */
+    .card {
+      background: white;
+      border: 1px solid var(--sand-dark);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      transition: transform 0.15s, box-shadow 0.15s;
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+      color: var(--ink);
+      display: block;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(13,79,108,0.1);
+    }
+    .card-accent {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 4px;
+    }
+    .card-icon { font-size: 1.8rem; margin-bottom: 0.75rem; }
+    .card h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+    .card p {
+      font-size: 0.85rem;
+      color: var(--ink-mid);
+      line-height: 1.6;
+    }
+
+    /* ── GRID ── */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1rem;
+    }
+
+    /* ── SECTION ── */
+    .section { padding: 3rem 0; }
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .section-title {
+      font-family: 'Fraunces', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .section-link {
+      font-size: 0.83rem;
+      font-weight: 600;
+      color: var(--ocean-mid);
+      text-decoration: none;
+    }
+    .section-link:hover { text-decoration: underline; }
+
+    /* ── BADGE / TAG ── */
+    .tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 2px 9px;
+      border-radius: 20px;
+      background: var(--sand);
+      color: var(--ink-mid);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── WHATSAPP CTA ── */
+    .wa-cta {
+      background: #25D366;
+      color: white;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1.4rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .wa-cta:hover { background: #1ebe5a; }
+    .wa-cta svg { width: 18px; height: 18px; fill: white; }
+
+    /* ── EVENT / RESOURCE ITEM ── */
+    .list-item {
+      background: white;
+      border: 1px solid var(--sand-dark);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      text-decoration: none;
+      color: var(--ink);
+      transition: border-color 0.15s;
+    }
+    .list-item:hover { border-color: var(--ocean-mid); }
+    .list-item-body { flex: 1; }
+    .list-item-title {
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 0.3rem;
+    }
+    .list-item-meta {
+      font-size: 0.8rem;
+      color: var(--ink-muted);
+    }
+    .list-item-date {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--ink-muted);
+      white-space: nowrap;
+      padding-top: 2px;
+    }
+
+    /* ── DIVIDER ── */
+    hr.divider { border: none; border-top: 1px solid var(--sand-dark); margin: 0; }
+
+    /* ── FOOTER ── */
+    .site-footer {
+      background: var(--ocean);
+      color: rgba(255,255,255,0.6);
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.82rem;
+      line-height: 1.7;
+    }
+    .site-footer a { color: var(--teal); text-decoration: none; }
+    .site-footer strong { color: white; font-family: 'Fraunces', serif; font-size: 1rem; }
+
+    /* ── PROSE ── */
+    .prose {
+      font-size: 0.97rem;
+      line-height: 1.85;
+      color: var(--ink-mid);
+      max-width: 640px;
+    }
+    .prose p + p { margin-top: 1rem; }
+    .prose h2 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.3rem;
+      color: var(--ink);
+      margin: 2rem 0 0.75rem;
+    }
+    .prose a { color: var(--ocean-mid); }
+
+    /* ── GROUP HEADER ── */
+    .group-header {
+      padding: 3rem 2rem 2rem;
+      color: white;
+    }
+    .group-header .eyebrow {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      opacity: 0.7;
+      margin-bottom: 0.6rem;
+    }
+    .group-header h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 600;
+      line-height: 1.15;
+      margin-bottom: 0.75rem;
+    }
+    .group-header p {
+      font-size: 1rem;
+      opacity: 0.8;
+      max-width: 560px;
+      line-height: 1.65;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── EMPTY STATE ── */
+    .empty-state {
+      padding: 2.5rem;
+      text-align: center;
+      color: var(--ink-muted);
+      background: white;
+      border: 1px dashed var(--sand-dark);
+      border-radius: var(--radius);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 640px) {
+      .site-nav { padding: 0 1rem; }
+      .nav-links .hide-mobile { display: none; }
+      .container { padding: 0 1rem; }
+      .page-header { padding: 2rem 1rem 1.5rem; }
+      .group-header { padding: 2rem 1rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a class="nav-logo" href="/">
+    🌊 <span>Marine Estate</span>&nbsp;Connected Communities
+  </a>
+  <ul class="nav-links">
+    <li class="hide-mobile"><a href="/groups/">Groups</a></li>
+    <li class="hide-mobile"><a href="/resources/">Resources</a></li>
+    <li class="hide-mobile"><a href="/events/">Events</a></li>
+    <li><a href="{{ .Site.Params.whatsapp_community_link }}" target="_blank" rel="noopener" class="nav-join">Join WhatsApp ↗</a></li>
+  </ul>
+</nav>
+
+{{ block "main" . }}{{ end }}
+
+<footer class="site-footer">
+  <strong>Marine Estate Connected Communities</strong><br>
+  Muizenberg, Cape Town · A community initiative supported by <a href="https://greenpill.network" target="_blank">Greenpill Cape Town</a><br>
+  <small>To update this site, contact your group admin.</small>
+</footer>
+
+</body>
+</html>

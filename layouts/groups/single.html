@@ -1,0 +1,109 @@
+{{ define "main" }}
+
+{{ $color := .Params.color | default "var(--ocean)" }}
+
+<div class="group-header" style="background: {{ $color }};">
+  <div class="container">
+    <p class="eyebrow">Community Group</p>
+    <h1>{{ .Params.icon | default "👥" }} {{ .Title }}</h1>
+    <p>{{ .Params.tagline | default "" }}</p>
+    {{ with .Params.whatsapp_link }}
+    <a href="{{ . }}" target="_blank" rel="noopener" class="wa-cta">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Join this group on WhatsApp
+    </a>
+    {{ end }}
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 3rem; align-items: start;">
+
+      <!-- MAIN CONTENT -->
+      <div>
+        {{ with .Content }}
+        <div class="prose" style="margin-bottom: 2.5rem;">{{ . }}</div>
+        <hr class="divider" style="margin-bottom: 2.5rem;">
+        {{ end }}
+
+        <!-- GROUP EVENTS -->
+        <h2 style="font-family: 'Fraunces', serif; font-size: 1.2rem; margin-bottom: 1rem;">Events & Announcements</h2>
+        {{ $groupTitle := .Title }}
+        {{ $events := where .Site.RegularPages "Section" "events" }}
+        {{ $groupEvents := where $events ".Params.group" $groupTitle }}
+        {{ if $groupEvents }}
+        <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2rem;">
+          {{ range $groupEvents }}
+          <a class="list-item" href="{{ .Permalink }}">
+            <div class="list-item-body">
+              <div class="list-item-title">{{ .Title }}</div>
+              <div class="list-item-meta">{{ .Summary | truncate 120 }}</div>
+            </div>
+            <div class="list-item-date">{{ .Date.Format "2 Jan" }}</div>
+          </a>
+          {{ end }}
+        </div>
+        {{ else }}
+        <div class="empty-state" style="margin-bottom: 2rem;">No events posted for this group yet.</div>
+        {{ end }}
+
+        <!-- GROUP RESOURCES -->
+        <h2 style="font-family: 'Fraunces', serif; font-size: 1.2rem; margin-bottom: 1rem; margin-top: 2rem;">Resources</h2>
+        {{ $resources := where .Site.RegularPages "Section" "resources" }}
+        {{ $groupResources := where $resources ".Params.groups" "intersect" (slice $groupTitle) }}
+        {{ if $groupResources }}
+        <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+          {{ range $groupResources }}
+          <a class="list-item" href="{{ .Permalink }}">
+            <div style="font-size: 1.4rem;">{{ .Params.icon | default "📌" }}</div>
+            <div class="list-item-body">
+              <div class="list-item-title">{{ .Title }}</div>
+              <div class="list-item-meta">{{ .Summary | truncate 120 }}</div>
+            </div>
+          </a>
+          {{ end }}
+        </div>
+        {{ else }}
+        <div class="empty-state">No resources for this group yet.</div>
+        {{ end }}
+      </div>
+
+      <!-- SIDEBAR -->
+      <div style="position: sticky; top: 80px;">
+        <div style="background: white; border: 1px solid var(--sand-dark); border-radius: var(--radius); padding: 1.5rem;">
+          <h3 style="font-family: 'Fraunces', serif; font-size: 1rem; margin-bottom: 1rem; color: var(--ink);">About this group</h3>
+          {{ with .Params.focus }}
+          <div style="margin-bottom: 0.75rem;">
+            <div style="font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-muted); margin-bottom: 0.25rem;">Focus</div>
+            <div style="font-size: 0.9rem;">{{ . }}</div>
+          </div>
+          {{ end }}
+          {{ with .Params.admin }}
+          <div style="margin-bottom: 0.75rem;">
+            <div style="font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-muted); margin-bottom: 0.25rem;">Admin</div>
+            <div style="font-size: 0.9rem;">{{ . }}</div>
+          </div>
+          {{ end }}
+          {{ with .Params.whatsapp_link }}
+          <div style="margin-top: 1.25rem;">
+            <a href="{{ . }}" target="_blank" rel="noopener" class="wa-cta" style="width: 100%; justify-content: center;">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Join on WhatsApp
+            </a>
+          </div>
+          {{ end }}
+          {{ with .Params.whatsapp_qr }}
+          <div style="margin-top: 1rem; text-align: center;">
+            <img src="{{ . }}" alt="QR code to join" style="width: 120px; height: 120px; border-radius: 6px; border: 3px solid var(--sand);">
+            <p style="font-size: 0.72rem; color: var(--ink-muted); margin-top: 0.4rem;">Scan to join</p>
+          </div>
+          {{ end }}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{{ end }}
