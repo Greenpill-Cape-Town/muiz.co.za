@@ -1,6 +1,7 @@
 baseURL = "https://muiz.co.za/"
 languageCode = "en-za"
 title = "Marine Estate Connected Communities"
+buildFuture = true
 
 [params]
   description = "Connecting the Marine Estate community in Muizenberg — one group at a time."
