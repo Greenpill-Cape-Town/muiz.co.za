@@ -2,7 +2,7 @@
 title: Trash to Treasure Art Exhibition
 date: 2026-06-05T18:00:00.000+02:00
 type: event
-group: null
+group: "'Berg Recycling & Waste"
 location: The Commons, surfers corner, Beach Rd, Muizenberg, Cape Town, 7970
 ---
 You are warmly invited to the launch of an art exhibition called Trash to Treasure at The Commons, 5th June 6-8pm to coincide with World Environmental Day.
