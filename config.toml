@@ -5,7 +5,7 @@ buildFuture = true
 
 [params]
   description = "Connecting the Marine Estate community in Muizenberg — one group at a time."
-  whatsapp_community_link = "https://chat.whatsapp.com/PLACEHOLDER"
+  whatsapp_community_link = "https://chat.whatsapp.com/BFUSLaW8r3I8UpCcEt1OPL?s=cl&p=i&ilr=2"
   whatsapp_community_qr = "/images/qr-community.png"
   email = ""
 
