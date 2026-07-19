@@ -1,6 +1,6 @@
 ---
 title: Planting at Thesen's Bridge
-icon: :plant
+icon: 🪴
 groups:
   - Greening and Vlei Care
 contact: Dale
