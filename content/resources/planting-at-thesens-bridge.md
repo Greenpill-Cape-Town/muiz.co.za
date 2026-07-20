@@ -5,4 +5,8 @@ groups:
   - Greening and Vlei Care
 contact: Dale
 ---
-![](/images/greening-pic.png "Greening")
+Plant allocations
+
+
+
+![](/images/greenign.jpg)
