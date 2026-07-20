@@ -53,6 +53,8 @@
       <a href="/events/" class="section-link">View all →</a>
     </div>
     {{ $events := where .Site.RegularPages "Section" "events" }}
+    {{ $events = where $events "Date" "ge" now }}
+    {{ $events = $events.ByDate }}
     {{ if $events }}
     <div style="display: flex; flex-direction: column; gap: 0.75rem;">
       {{ range first 4 $events }}
@@ -66,7 +68,7 @@
       {{ end }}
     </div>
     {{ else }}
-    <div class="empty-state">No events posted yet — check back soon.</div>
+    <div class="empty-state">No upcoming events yet — check back soon.</div>
     {{ end }}
   </div>
 </section>
