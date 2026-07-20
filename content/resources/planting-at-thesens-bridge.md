@@ -7,4 +7,4 @@ contact: Dale
 ---
 Plant allocations
 
-![](/images/greeningpic3.jpg)
+![Greening](/images/greeningpic3.jpg "Greening pic")
