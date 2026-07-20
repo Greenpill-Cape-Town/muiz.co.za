@@ -7,6 +7,4 @@ contact: Dale
 ---
 Plant allocations
 
-
-
-![](/images/greenign.jpg)
+![](/images/greeningpic.png)
