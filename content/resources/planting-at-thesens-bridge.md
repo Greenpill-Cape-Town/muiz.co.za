@@ -5,6 +5,6 @@ groups:
   - Greening and Vlei Care
 contact: Dale
 ---
-Plant allocations
+Below is the plot allocations for community members to participate in the planting project happening at Thesen's Bridge.
 
 ![Greening](/images/greeningpic3.jpg "Greening pic")
