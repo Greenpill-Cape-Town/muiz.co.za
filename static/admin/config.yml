@@ -6,7 +6,7 @@ media_folder: "static/images"
 public_folder: "/images"
 
 # Netlify Identity
-site_url: https://muiz.co.za
+site_url: https://marineestate.co.za
 
 collections:
 
