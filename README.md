@@ -23,7 +23,7 @@ content/
 
 To update your group's content, events, or resources:
 
-1. Go to [muiz.co.za/admin](https://muiz.co.za/admin)
+1. Go to [marineestate.co.za/admin](https://marineestate.co.za/admin)
 2. Log in with your Netlify Identity account
 3. Edit your group's page, add events, or add resources
 4. Click **Publish** — changes go live within ~1 minute
@@ -55,7 +55,7 @@ Connected to Netlify. Every push to `main` triggers a new build and deploy autom
 - [ ] Add QR code images to `static/images/` and reference in group front matter
 - [ ] Enable Netlify Identity in Netlify dashboard
 - [ ] Invite group admins via Netlify Identity
-- [ ] Point muiz.co.za DNS to Netlify
+- [ ] Point marineestate.co.za DNS to Netlify
 
 ---
 
