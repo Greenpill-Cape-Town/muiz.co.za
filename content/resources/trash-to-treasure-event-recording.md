@@ -4,7 +4,7 @@ icon: 📌
 groups:
   - "'Berg Recycling & Waste"
 contact: Paul Weinberg
-url: https://drive.google.com/drive/folders/1TvTX53zzLwdIpOjLU91ptKuKxXHg-s_G?usp=drive_link
+external_link: https://drive.google.com/drive/folders/1TvTX53zzLwdIpOjLU91ptKuKxXHg-s_G?usp=drive_link
 ---
 **Trash to Treasure** brought together artists, musicians, community organisers and curious visitors at The Commons on 5 June 2026 for a lively celebration of creativity, reuse and environmental imagination.
 
