@@ -96,5 +96,5 @@ collections:
           - "Learning Circle"
         hint: "Select all groups this resource is relevant to."
       - { label: "Contact", name: "contact", widget: "string", required: false }
-      - { label: "Website URL", name: "url", widget: "string", required: false }
+      - { label: "Website URL", name: "external_link", widget: "string", required: false }
       - { label: "Description", name: "body", widget: "markdown" }
