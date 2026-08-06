@@ -1,6 +1,6 @@
 ---
 title: Trash to Treasure event recording
-icon: 📌
+icon: 🌻
 groups:
   - "'Berg Recycling & Waste"
 contact: Paul Weinberg
