@@ -10,6 +10,7 @@ external_link: https://drive.google.com/drive/folders/1TvTX53zzLwdIpOjLU91ptKuKx
 
 The [event recording](https://drive.google.com/file/d/13n_2PCGBXFeA-ToyYhLNreynfZsThfVw/view?usp=sharing) is publicly available.
 As is the [film that was looping](https://drive.google.com/file/d/1Os1p0V5R-5doCffyviGrxr741Q7HnNM0/view?usp=sharing) during the event to introduce the artists and show the animation.
+[Message in a Bottle, the animation,](https://drive.google.com/file/d/1wfKRScIuieVfxyVebaI-kiHm04iLg9pc/view?usp=sharing) can be viewed in the same location.
 
 
 Created as a community art initiative connecting artists and artmakers from Muizenberg and Vrygrond, the physical and online exhibition featured work by Angela McPherson, Harry Charalambos, Jupiter Thompson, Heleen Verwey, Tova Luck, Tyler Pike, Nicola Schorn, Ruby D’Almar, Lizzie Kruger and Dale Lawrence.
