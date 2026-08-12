@@ -1,6 +1,6 @@
 ---
 title: Community Groups
-description: All active groups within Marine Estate Connected Communities
+description: All active groups within Connected Community Marine Estate
 icon: :D
 tagline: Becoming a more connected community
 color: "#23bcbc"
