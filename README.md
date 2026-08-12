@@ -1,6 +1,6 @@
-# Marine Estate Connected Communities — muiz.co.za
+# Connected Community Marine Estate — muiz.co.za
 
-Website for the Marine Estate Connected Communities (CCME) in Muizenberg, Cape Town.
+Website for the Connected Community Marine Estate (CCME) in Muizenberg, Cape Town.
 
 ## Stack
 
